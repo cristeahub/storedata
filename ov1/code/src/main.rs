@@ -15,10 +15,9 @@ fn main() {
     let buff = [0u8; 64 * 1024];
 
     println!("Make temp dir");
-    match fs::mkdir(&Path::new("tmp"), USER_RWX) {
-        Err(why) => println!("! {:?}", why.kind),
-        Ok(_) => {},
-    };
+    fs::mkdir(&Path::new("tmp"), USER_RWX).unwrap_or_else(|why| {
+        println!("! {:?}", why.kind)
+    });
 
     println!("Create file");
     let mut f = match File::create(&Path::new("tmp/a.txt")) {
