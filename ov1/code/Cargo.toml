@@ -1,0 +1,5 @@
+[package]
+
+name = "writing_test"
+version = "0.0.1"
+authors = ["Christoffer Tønnessen <christoffer.tonnessen@gmail.com>"]
