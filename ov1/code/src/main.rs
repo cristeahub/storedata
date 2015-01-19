@@ -30,5 +30,15 @@ fn main() {
         panic!("Error! {}", why.desc)
     });
 
+    println!("Remove written file");
+    fs::unlink(&Path::new("tmp/a.txt")).unwrap_or_else(|why| {
+        panic!("Error! {}", why.desc)
+    });
+
+    println!("Remove temp directory");
+    fs::rmdir(&Path::new("tmp")).unwrap_or_else(|why| {
+        panic!("Error! {}", why.desc)
+    });
+
     println!("Done");
 }
