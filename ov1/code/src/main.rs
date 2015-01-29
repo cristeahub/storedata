@@ -1,10 +1,13 @@
 use std::io::fs;
 use std::io::{File, IoResult, USER_RWX};
 
-const BLOCKSIZE : usize = 8192;
+const BLOCKSIZE : usize = 8_192;
+static NBLOCKS_BIG : usize = 131_072;
+static NBLOCKS : usize = 10;
 
 fn write_to_file(f: &mut File,
                  buff: &[u8]) -> IoResult<()>{
+    println!("Write to file");
     f.write(buff)
 }
 
@@ -12,7 +15,7 @@ fn main() {
     println!("Welcome to the beautiful write speed test program");
     println!("This program will test the wiriting speeds of 2^n gb where n = [0..5]");
 
-    let sizes = [1, 2, 4, 8, 16, 32];
+    let sizes = [1, 1, 1, 1];
     let buff = [0u8; BLOCKSIZE];
 
     println!("Make temp dir");
@@ -26,10 +29,13 @@ fn main() {
         Ok(file) => file,
     };
 
-    println!("Write to file");
-    write_to_file(&mut f, &buff).unwrap_or_else(|why| {
-        panic!("Error! {}", why.desc)
-    });
+    sizes.iter().map(|elem| {
+        for i in (0..(*elem)*NBLOCKS) {
+            write_to_file(&mut f, &buff).unwrap_or_else(|why| {
+                panic!("Error! {}", why.desc)
+            });
+        }
+    }).count();
 
     println!("Remove written file");
     fs::unlink(&Path::new("tmp/a.txt")).unwrap_or_else(|why| {
