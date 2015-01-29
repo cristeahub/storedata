@@ -3,7 +3,7 @@ use std::io::{File, IoResult, USER_RWX};
 
 const BLOCKSIZE : usize = 8_192;
 static NBLOCKS_BIG : usize = 131_072;
-static NBLOCKS : usize = 10;
+static NBLOCKS : usize = 3;
 
 fn write_to_file(f: &mut File,
                  buff: &[u8]) -> IoResult<()>{
@@ -15,7 +15,7 @@ fn main() {
     println!("Welcome to the beautiful write speed test program");
     println!("This program will test the wiriting speeds of 2^n gb where n = [0..5]");
 
-    let sizes = [1, 1, 1, 1];
+    let sizes = [1, 1];
     let buff = [0u8; BLOCKSIZE];
 
     println!("Make temp dir");
