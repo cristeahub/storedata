@@ -35,7 +35,7 @@ fn main() {
                 panic!("Error! {}", why.desc)
             });
         }
-    }).count();
+    }).count(); // the iterator is so lazy that .count() is used to invoke it
 
     println!("Remove written file");
     fs::unlink(&Path::new("tmp/a.txt")).unwrap_or_else(|why| {
