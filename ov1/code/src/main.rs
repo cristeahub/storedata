@@ -5,7 +5,6 @@ use std::old_io::{File, IoResult, USER_RWX};
 
 const BLOCKSIZE : usize = 4_096;
 static NBLOCKS : usize = 262_144;
-//static NBLOCKS : usize = 2;
 static NTESTS : usize = 6;
 
 fn write_to_file(f: &mut File,
